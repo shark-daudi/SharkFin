@@ -2,22 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🦈 SharkFin Diary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SharkFin Diary 🦈</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🦈 SharkFin Diary</h1>
-
   <div class="container">
-    <div class="form">
+    <h1>🦈 SharkFin Diary</h1>
+
+    <!-- Add / Edit Event Form -->
+    <div class="event-form">
       <input type="text" id="title" placeholder="Event Title">
-      <textarea id="desc" placeholder="Event Description"></textarea>
+      <textarea id="description" placeholder="Event Description"></textarea>
       <input type="datetime-local" id="datetime">
-      <button id="addBtn">Add Event</button>
+      <button id="saveBtn">Save Event</button>
+      <button id="updateBtn" class="hidden">Update Event</button>
     </div>
 
-    <h2>Your Events</h2>
-    <ul id="eventList"></ul>
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" placeholder="Search events...">
+
+    <!-- Event List -->
+    <div id="eventList"></div>
   </div>
 
   <script src="script.js"></script>
