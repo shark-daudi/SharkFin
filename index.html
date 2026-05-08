@@ -3,28 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SharkFin Diary 🦈</title>
+  <title>SharkFin Diary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>🦈 SharkFin Diary</h1>
 
-    <!-- Add / Edit Event Form -->
-    <div class="event-form">
-      <input type="text" id="title" placeholder="Event Title">
-      <textarea id="description" placeholder="Event Description"></textarea>
-      <input type="datetime-local" id="datetime">
-      <button id="saveBtn">Save Event</button>
-      <button id="updateBtn" class="hidden">Update Event</button>
-    </div>
-
-    <!-- Search Bar -->
-    <input type="text" id="searchBar" placeholder="Search events...">
-
-    <!-- Event List -->
-    <div id="eventList"></div>
+  <div class="bg-anim" aria-hidden="true">
+    <div class="fin fin-1"></div>
+    <div class="fin fin-2"></div>
+    <div class="fin fin-3"></div>
+    <div class="wave"></div>
   </div>
+
+  <div class="app">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg class="shark-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 22C7 14 14 10 22 11L30 8L26 16C28 18 29 21 28 24C24 28 16 29 10 26L3 22Z" fill="currentColor" opacity="0.9"/>
+          <path d="M22 11L28 4L26 16" fill="currentColor" opacity="0.6"/>
+          <circle cx="11" cy="19" r="1.5" fill="white" opacity="0.8"/>
+        </svg>
+        <div>
+          <h1 class="logo-title">SharkFin Diary</h1>
+          <p class="logo-sub">Track your deep waters</p>
+        </div>
+      </div>
+      <div class="header-stats" id="headerStats"></div>
+    </header>
+
+    <main class="main">
+
+      <!-- Form Panel -->
+      <section class="form-panel" id="formPanel">
+        <div class="form-header">
+          <span class="form-label" id="formLabel">New Event</span>
+          <button class="icon-btn" id="collapseBtn" title="Collapse form" aria-label="Collapse form">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <div class="form-body" id="formBody">
+          <div class="field">
+            <label class="field-label" for="titleInput">Title</label>
+            <input type="text" id="titleInput" class="field-input" placeholder="What's happening?">
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="descInput">Description</label>
+            <textarea id="descInput" class="field-input field-textarea" placeholder="Add details..."></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field" style="flex:1">
+              <label class="field-label" for="dateInput">Date & Time</label>
+              <input type="datetime-local" id="dateInput" class="field-input">
+            </div>
+            <div class="field" style="flex:1">
+              <label class="field-label" for="tagInput">Tag</label>
+              <select id="tagInput" class="field-input field-select">
+                <option value="">No tag</option>
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="health">Health</option>
+                <option value="social">Social</option>
+                <option value="travel">Travel</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-ghost" id="clearBtn">Clear</button>
+            <button class="btn-primary" id="saveBtn">Save Event</button>
+            <button class="btn-primary hidden" id="updateBtn">Update Event</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Events Panel -->
+      <section class="events-panel">
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="8.5" cy="8.5" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input type="text" id="searchBar" class="search-input" placeholder="Search events...">
+          </div>
+          <div class="filter-tabs" id="filterTabs">
+            <button class="tab active" data-filter="all">All</button>
+            <button class="tab" data-filter="upcoming">Upcoming</button>
+            <button class="tab" data-filter="past">Past</button>
+          </div>
+        </div>
+
+        <!-- Sort Row -->
+        <div class="sort-row">
+          <span class="event-count" id="eventCount">0 events</span>
+          <select class="sort-select" id="sortSelect">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="soonest">Soonest first</option>
+          </select>
+        </div>
+
+        <!-- Event List -->
+        <div id="eventList" class="event-list"></div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
   <script src="script.js"></script>
 </body>
